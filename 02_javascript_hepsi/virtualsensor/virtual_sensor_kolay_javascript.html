@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head><title></title>
+<meta http-equiv="Content-type" content="application/javascript; charset=UTF-8"/>
+<script type="text/javascript" src="d3.min.js"></script>
+<style>
+.chart rect {
+    fill: steelblue;
+  }
+</style>
+</head>
+<body>
+
+<p id="demo"></p>
+<svg class="chart"></svg>
+
+<p></p>
+<script>
+
+var sensors=[];        //Sensorleri tutacak olan Object Array
+generateSensors(150);   //şu kadar adet sensor oluştur
+
+function generateSensors(sensorno)    // Sensor Generator Fonksiyon ---N adet sensor uretir
+	{
+		for(var i=0; i<sensorno; i++)
+		{
+			var j=randomFloatBetween(100,200,1);
+			var k=randomFloatBetween(100,200,1);
+			var l = randomFloatBetween(100,200,1);
+			sensors[i]=new Sensor(i,j,k,l);
+	    }
+		
+	}	
+
+function Sensor(ido,value,geo_x,geo_y)   //Sensor Object Constructor  --Sensor Objesi icin Class
+	{
+		this.id= ido;
+        this.val= value
+        this.xcoord= geo_x;
+		this.ycoord= geo_y;
+    }
+
+function getRandomArbitrary(min, max)
+{
+  return Math.random() * (max - min) + min;
+}
+  
+function randomFloatBetween(minValue,maxValue,precision){
+ if(typeof(precision) == 'undefined')
+ {
+ precision = 2;
+ }
+ return parseFloat(Math.min(minValue + (Math.random() * (maxValue - minValue)),maxValue).toFixed(precision));
+}
+
+var json_data=JSON.stringify(sensors);  //Sensor Object Arrayini JSON stringe e dönüştürdüm
+writeSensorDataToPage(json_data)
+
+function writeSensorDataToPage(json)     //JSON Verisini Sayfaya Yazar
+{
+document.write(json);
+}
+
+
+
+	</script>
+	
+</body>
+
+</html>

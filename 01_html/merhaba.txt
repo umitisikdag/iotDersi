@@ -1,0 +1,7 @@
+Lorem Ipsum, dizgi ve baski endüstrisinde kullanilan migir metinlerdir. 
+Lorem Ipsum, adi bilinmeyen bir matbaacinin bir hurufat numune kitabi olusturmak üzere 
+bir yazi galerisini alarak karistirdigi 1500'lerden beri endüstri standardi sahte metinler olarak kullanilmistir.
+ Besyüz yil boyunca varligini sürdürmekle kalmamis, ayni zamanda pek degismeden 
+elektronik dizgiye de siçramistir. 1960'larda Lorem Ipsum pasajlari da içeren 
+Letraset yapraklarinin yayinlanmasi ile ve yakin zamanda Aldus PageMaker gibi 
+Lorem Ipsum sürümleri içeren masaüstü yayincilik yazilimlari ile popüler olmustur.

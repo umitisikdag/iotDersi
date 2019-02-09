@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Inch-CM Dönüşümü</title>
+</head>
+<body>
+	<form>
+		inch:<input type="text" id="inch">
+		<input type="button" value="donustur->" onclick="donustur()">
+		CM:<input type="text" id="cm">
+	</form>
+	<script>
+		function donustur(){
+			var inch, cm ; // değişkenleri tanımladık
+
+			//inch değerini okuyalım 
+			inch=Number(document.getElementById("inch").value);
+
+			// inch değerini CM'ye çevirelim form içine yazalım
+			cm=inch*2.54;
+			document.getElementById("cm").value=cm;	
+		}	
+	</script>
+</body>
+</html>
+		

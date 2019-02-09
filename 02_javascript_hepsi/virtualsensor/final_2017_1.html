@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+    <div id="yazi"></div>
+    <script>
+	//With special thanks to Sefa Said Deniz
+        function Sensor(kisi) {
+            this.kisiSayisi = kisi;
+            this.isikDegeri = 0;
+            this.giris = function () {
+                this.kisiSayisi++;
+            };
+
+            this.cikis = function () {
+                this.kisiSayisi--;
+            };
+
+            this.isiklandir = function () {
+                this.isikDegeri++;
+            };
+
+            this.sayfayaYaz = function () {
+                document.getElementById("yazi").innerHTML = 'Kişi Sayısı: ' + this.kisiSayisi + ' <br> Işık Değeri: '+this.isikDegeri;
+            }
+        }
+
+        var sensor1 = new Sensor(5);
+        var sensor2 = new Sensor(1);
+        var sensor3 = new Sensor(0);
+        var cikilanOda = prompt("Lütfen Çıkılan Oda Numarasını Giriniz");
+        var girilenOda = prompt("Lütfen Girilen Oda Numarasını Giriniz");
+        var kisiSayi = prompt("Lütfen Karşıa Geçen Kişi Saysını Giriniz");
+        var aydinlatilcak = prompt("Lütfen Aydınlatacak Odayı Giriniz");
+        var yazdirilacak = prompt("Lütfen Yazıdırılacak Odayı Giriniz");
+
+        function odayaGonder(cikilan,girilen,kisi) {
+
+            switch (parseInt(cikilan)){
+                case 1:
+                    for(x = 0;x<=kisi;x++){
+                        sensor1.cikis();
+                    }
+                    break;
+                case 2:
+                    for(x=0;x<=kisi;x++){
+                        sensor2.cikis();
+
+                    }
+                    break;
+                case 3:
+                    for(x=0;x<=kisi;x++){
+                        sensor3.cikis();
+
+                    }
+                    break;
+            }
+            switch (parseInt(girilen)){
+                case 1:
+                    for(x = 0;x<=kisi;x++){
+                        sensor1.giris();
+
+                    }
+                    break;
+                case 2:
+                    for(x=0;x<=kisi;x++){
+                        sensor2.giris();
+
+                    }
+                    break;
+                case 3:
+                    for(x=0;x<=kisi;x++){
+                        sensor3.giris();
+
+                    }
+                    break;
+            }
+        }
+        function aydinlat(oda) {
+
+            switch (parseInt(oda)){
+                case 1:
+                    sensor1.isiklandir();
+
+                    break;
+                case 2:
+                    sensor2.isiklandir();
+
+                    break;
+                case 3:
+                    sensor3.isiklandir();
+
+                    break;
+            }
+        }
+
+        function yazdir(oda) {
+
+            switch (parseInt(oda)){
+                case 1:
+                    sensor1.sayfayaYaz();
+
+                    break;
+                case 2:
+                    sensor2.sayfayaYaz();
+
+                    break;
+                case 3:
+                    sensor3.sayfayaYaz();
+
+                    break;
+            }
+        }
+        odayaGonder(cikilanOda,girilenOda,kisiSayi);
+        aydinlat(aydinlatilcak);
+
+        yazdir(yazdirilacak);
+    </script>
+</body>
+</html>

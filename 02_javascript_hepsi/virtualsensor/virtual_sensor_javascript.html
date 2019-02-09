@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head><title></title>
+<meta http-equiv="Content-type" content="application/javascript; charset=UTF-8"/>
+<script type="text/javascript" src="d3.min.js"></script>
+<style>
+.chart rect {
+    fill: steelblue;
+  }
+</style>
+</head>
+<body>
+
+<p id="demo"></p>
+<svg class="chart"></svg>
+
+<p></p>
+<script>
+
+/*
+//http://www.w3schools.com/js/js_object_definition.asp
+//http://www.w3schools.com/json/json_eval.asp
+//https://www.dashingd3js.com/
+//https://www.dashingd3js.com/table-of-contents
+//https://www.dashingd3js.com/adding-an-svg-element
+//https://www.dashingd3js.com/svg-basic-shapes-and-d3js
+//http://javascript.tutorialhorizon.com/2015/01/24/d3-fundamentals-creating-a-simple-bar-graph/
+//https://bost.ocks.org/mike/bar/
+
+
+----------------------------------------Objeler var ile oluşurulabilir------------------------------------
+var person = new Object();
+person.firstName = "John";
+person.lastName = "Doe";
+person.age = 50;
+person.eyeColor = "blue";
+
+----------------------------------------Objeler function ile oluşurulabilir, daha iyi yöntem-------------
+function person(first, last, age, eye) 
+{
+    this.firstName = first;
+    this.lastName = last;
+    this.age = age;
+    this.eyeColor = eye;
+}
+var myFather = new person("John", "Doe", 50, "blue");
+var myMother = new person("Sally", "Rally", 48, "green");
+
+-----------------------------------------Objelerden oluşan diziler object array var ile oluşturulur------------------------------
+var persons=[];
+for(var i=0; i<10; i++)
+{
+persons[i]=new person("John", "Doe", 50, "blue");
+}
+-------------------------------------------------JSON Text den object oluşturma---------------------------------------------------
+var text = '{ "employees" : [' +
+'{ "firstName":"John" , "lastName":"Doe" },' +
+'{ "firstName":"Anna" , "lastName":"Smith" },' +
+'{ "firstName":"Peter" , "lastName":"Jones" } ]}';
+
+var obj = JSON.parse(text);
+
+<p id="demo"></p> 
+
+document.getElementById("demo").innerHTML =
+obj.employees[1].firstName + " " + obj.employees[1].lastName; 
+
+--------------------------------------------Objeden JSON oluşturma---------------------------------------------------------
+var json_data=JSON.stringify(persons);
+document.write(json_data);
+
+*/
+var sensors=[];        //Sensorleri tutacak olan Object Array
+generateSensors(150);   //şu kadar adet sensor oluştur
+//document.getElementById("demo").innerHTML =sensors[2].id;
+var json_data=JSON.stringify(sensors);  //Sensor Object Arrayini JSON stringe e dönüştürdüm
+writeSensorDataToPage(json_data)
+makeCirclePlotD3(json_data);
+makeBarPlotD3(json_data);
+
+
+function generateSensors(sensorno)    // Sensor Generator Fonksiyon ---N adet sensor uretir
+	{
+		for(var i=0; i<sensorno; i++)
+		{
+			var j=randomFloatBetween(100,200,1);
+			var k=randomFloatBetween(100,200,1);
+			var l = randomFloatBetween(100,200,1);
+			sensors[i]=new Sensor(i,j,k,l);
+	    }
+		
+	}	
+
+function Sensor(ido,value,geo_x,geo_y)   //Sensor Object Constructor  --Sensor Objesi icin Class
+	{
+		this.id= ido;
+        this.val= value
+        this.xcoord= geo_x;
+		this.ycoord= geo_y;
+    }
+
+function getRandomArbitrary(min, max)
+{
+  return Math.random() * (max - min) + min;
+}
+  
+function randomFloatBetween(minValue,maxValue,precision){
+ if(typeof(precision) == 'undefined')
+ {
+ precision = 2;
+ }
+ return parseFloat(Math.min(minValue + (Math.random() * (maxValue - minValue)),maxValue).toFixed(precision));
+}
+
+function makeCirclePlotD3(json_data)                     // Noktalardan grafik yapan fonksiyon
+{
+/*
+var jsonCircles = [
+   { "x_axis": 30, "y_axis": 30, "radius": 20, "color" : "green" },
+   { "x_axis": 70, "y_axis": 70, "radius": 20, "color" : "purple"},
+   { "x_axis": 110, "y_axis": 100, "radius": 20, "color" : "red"}];
+ alert(jsonCircles);  
+*/
+
+var obj = JSON.parse(json_data);      // var obj=sensors | oyleki obj yerine yukarıda gloabalde tanımlı sensors de kullanılabilir.
+// alert(obj[0].xcoord);
+
+var svgContainer = d3.select("body").append("svg")
+                                     .attr("width", 400)
+                                     .attr("height", 400);
+ 
+var circles = svgContainer.selectAll("circle")
+                          .data(obj)
+                          .enter()
+                          .append("circle");
+
+var circleAttributes = circles
+                       .attr("cx", function (obj) { return obj.xcoord; })
+                       .attr("cy", function (obj) { return obj.ycoord; })
+                       .attr("r", 3)
+                       .style("fill", "red");
+}
+
+function makeBarPlotD3(json_data)                         //Bar grafiği yapan fonksiyon
+{
+
+var obj = JSON.parse(json_data);               //JSON data dan object array e donus...obj bir object array dir.
+
+var sensor_values = getFields(obj, "val"); //Object Array var ise bundan istediğimiz bir attribute un farklı object instancelardaki tum degerlerini bir array e atan fonksiyona call
+
+// alert(sensor_values[1]);
+
+
+var scale = {
+  y: d3.scale.linear()
+};
+
+var totalWidth = 1500;
+var totalHeight = 400;
+
+scale.y.domain([0, 300]); //Bar Chart için Maximum Y 300 olsun
+scale.y.range([totalHeight, 0]);
+
+//var ages = [30, 22, 33, 45];
+var barWidth = 10;
+
+var chart = d3.select('.chart')
+    .attr({
+        'width': totalWidth,
+        'height': totalHeight
+    });
+
+var bars = chart
+    .selectAll('g')
+    .data(sensor_values)
+    .enter()
+    .append('g');
+
+bars.append('rect')
+    .attr(
+		{
+        'x': function (d, i) {
+            return i * barWidth;
+        },
+        'y': scale.y,
+        'height': function (d) {
+            return totalHeight - scale.y(d);
+        },
+        'width': barWidth - 1
+		}
+	);
+}
+
+function writeSensorDataToPage(json)     //JSON Verisini Sayfaya Yazar
+{
+document.write(json);
+}
+
+function getFields(input, field) //Object Array var ise (input) bundan istediğimiz bir attribute (field) un farklı object instancelardaki tum degerlerini bir array e atan fonksiyon
+{
+    var output = [];
+    for (var i=0; i < input.length ; ++i)
+        output.push(input[i][field]);
+    return output;
+}
+
+
+	</script>
+	
+</body>
+
+</html>

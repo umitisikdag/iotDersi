@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sayfa Basligi</title>
+</head>
+<body>
+	<form name="test">
+	Ad:<input type="text" id="ad"><br>
+	Soyad:<input type="text" id="soyad"><br>
+	Email:<input type="text" id="email"><br>
+	<input type="button" value="Yaz" onclick="yaz()">
+</form>
+<script>
+	function yaz() {
+		var formum=document.forms["test"];
+		var boyut=formum.length;
+		for(var i=0; i<boyut; i++)
+			document.write(formum.elements[i].value+"<br>");
+	}
+
+</script>
+</body>
+</html>

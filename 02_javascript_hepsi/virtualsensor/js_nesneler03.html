@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<script>
+//http://www.jsoneditoronline.org/
+//------------------------------------
+function sensor(id,sicaklik,nem,xcoord,ycoord) {
+//-------------------
+    this.sid = id;
+    this.heatval = sicaklik;
+    this.humidity = nem;
+ 	this.x=xcoord;
+	this.y=ycoord;
+//------------------
+	this.changeHeat = function (yenisicaklik) {this.heatval = yenisicaklik;};
+	this.changeLocation = function (xyeni,yyeni) {this.x = xyeni;
+													this.y=yyeni;};
+}
+//-----------------------------------------
+var obj1 = new sensor("S01", 24, 60,0,0);
+alert(obj1.x);
+alert(obj1.y);
+alert(obj1.heatval);
+var getx=prompt("Yeni X ne olsun");
+var gety=prompt("Yeni Y ne olsun");
+var getheat=prompt("Yeni sıcaklık ne olsun");
+obj1.changeLocation(getx,gety);
+obj1.changeHeat(getheat);
+alert(obj1.x);
+alert(obj1.y);
+alert(obj1.heatval);
+var obj2=new sensor("S02", 24, 60,8,8);
+//--Object dizisi olusturup 2 obje eklemek
+var sensors=[];
+sensors.push(obj1);
+sensors.push(obj2);
+//----Object dizisini JSON a cevirmek ve sayfaya yazdırmak
+var json_data=JSON.stringify(sensors);
+document.write(json_data);
+//---JSON okuyarak object dizisine cevirmek ve alert vermek
+var json = json_data;
+var sensors2 = JSON.parse(json);
+alert(sensors2[1].x);
+
+
+
+</script>
+</html>
+
+
+
+
+
+

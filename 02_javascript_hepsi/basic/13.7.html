@@ -1,0 +1,30 @@
+<!DOCTYPE hmtl>
+<hthml>
+<head><title></title></head>
+<body>	
+	<script>
+		//diziyi tanımlayalım
+		var dizi=new Array();
+
+		//okunacak eleman sayısı
+		var n=prompt("Eleman sayısı: ");
+
+		//Eleman okuyup diziye atalım
+		for(var i=0; i<n; i++)
+			dizi[i]=Number(prompt(i+" indisli eleman: "));
+
+		//Elemanları sıralayıp ekrana yazalım
+		dizi.sort();
+		for(var i=0; i<n; i++)
+			document.write(dizi[i]+"<br>");
+
+	
+		//Elemanları tersten sıralayalım ve ekrana yazdıralım
+		dizi.reverse();
+		for(var i=0; i<n; i++)
+			document.write(dizi[i]+"<br>");
+
+	</script>
+</body>
+<html>
+

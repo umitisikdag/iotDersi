@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Form ile 3 sayının ortalaması</title>
+</head>
+<body>
+	<form name="giris" onsubmit="return kontrol()">
+		Kullanici Adi:<input type="text" id="ad" ><br>
+		Parola:<input type="password" id="parola"><br>
+		Parola (Tekrar):<input type="password" name="parola2"><br>
+		<input type="submit"><input type="reset">
+	</form>
+
+	<script>
+		function kontrol() {
+			var kul=document.giris.parola.value;
+			var parola=document.giris.parola.value;
+			var parola2=document.giris.parola2.value;
+				if (kul==null || kul.length<3) {
+					alert("Kullanici adina en az 3 harf giriniz!");
+					document.giris.ad.focus();
+					return false;
+				}
+
+				else if( parola2 == null || parola2=="") {
+					alert("parolayi tekrar giriniz!");
+					document.giris.parola2.focus();
+					return false;
+				}
+
+				else if(parola!=parola2){
+					alert("Parola eslesmiyor!");
+					return false;
+				}
+
+				return true;
+		}	
+	</script>
+</body>
+</html>
+		

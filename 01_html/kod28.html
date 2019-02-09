@@ -1,0 +1,38 @@
+<html>
+<body>
+<h1>Test Sayfasi</h1>
+<p id="abc">
+Renk degisimi burada <br>gerceklesiyor.
+</p>
+<p id="test">Merhaba</p>
+<script>
+function Degistir()
+{
+document.getElementById("abc").style.color="#ff0000";
+          
+}
+function Degistir2()
+{
+x=document.getElementById("abc") 
+x.style.color="#0000ff";          
+}
+function Degistir3()
+{
+x=document.getElementById("abc") 
+x.style.color="#00ff00";          
+}
+function Degistir4()
+{
+x=document.getElementById("test")
+y= document.getElementById("test")
+x.style.color="#00ff00";  
+y.style.color="#ff0000";    
+}
+</script>
+
+<button type="button" onclick="Degistir()">Kirmizi</button>
+<button type="button" onclick="Degistir2()">Mavi</button>
+<button type="button" onclick="Degistir3()">Yesil</button>
+<button type="button" onclick="Degistir4()">Test</button>
+</body>
+</html> 

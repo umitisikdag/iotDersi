@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<script>
+function Get(yourUrl){
+    var Httpreq = new XMLHttpRequest(); // a new request
+    Httpreq.open("GET",yourUrl,false);
+    Httpreq.send(null);
+    return Httpreq.responseText;          
+}
+
+var jsonobj = JSON.parse(Get('http://172.16.144.180/'));
+    var t=jsonobj.type;
+    var v1=jsonobj.features[0].geometry.coordinates[0];
+	var v2=jsonobj.features[0].geometry.coordinates[1];
+	var r_id= jsonobj.features[0].properties.id;
+	var r_name= jsonobj.features[0].properties.name;
+	var r_info= jsonobj.features[0].properties.info;
+	var r_value= jsonobj.features[0].properties.value;
+	
+	alert(t);
+	alert(v1);
+	alert(v2);
+	alert(r_id);
+	alert(r_name);
+	alert(r_info);
+	alert(r_value);				
+	
+/* JSON Verisi
+{
+type: "FeatureCollection",
+	features: 
+	[
+		{
+		type: "Feature",
+		geometry: {
+			type: "Point",
+			coordinates: [
+				26.5815421,
+				41.21233689
+						]
+					},
+		properties: {
+			id: "101011",
+			name: "Virtual Sensor 1",
+			info: "Blink Sensor",
+			value: 205
+					}
+		}
+	]
+}
+*/
+
+
+
+</script>
+</html>
+
+
+
+
+
+

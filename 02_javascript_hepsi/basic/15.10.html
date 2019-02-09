@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Form ile 3 sayının ortalaması</title>
+</head>
+<body>
+	<form>
+		sayi1:<input type="text" id="sayi1">
+		sayi2:<input type="text" id="sayi2">
+		sayi3:<input type="text" id="sayi3">
+		<input type="button" value="Hesapla->" onclick="ort()">
+	</form>
+	<script>
+		function ort() {
+			var s1, s2, s3, ort; //değişkenleri tanımlayalım
+
+			//Girilen sayıları okuyalım
+			s1=Number(document.getElementById("sayi1").value);
+			s2=Number(document.getElementById("sayi2").value);
+			s3=Number(document.getElementById("sayi1").value);
+
+			ort=(s1+s2+s3)/3; //sayıların ortalaması
+
+			//işlem sonucunu ekrana yazdıralım
+			document.getElementById("sonuc").innerHTML=ort;
+		}	
+	</script>
+</body>
+</html>
+	

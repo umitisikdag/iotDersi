@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Dikdörtgenin alanının cevresi</title>
+</head>
+<body>
+	<form>
+		Genislik:<input type="text" id="genislik">
+		Yukseklik:<input type="text" id="yukseklik">
+		<input type="button" value="Hesapla->" onclick="dik()">
+		Sonuc:<span id="sonuc"></span>
+	</form>
+	<script>
+		funciton dik() {
+			var g, y, alan, cevre; //değişkenleri tanımlayalım
+
+			//girdileri okuyalım
+			g=Number(document.getElementById("genislik").value);
+			y=Number(document.getElementById("yukseklik").value);
+
+			//alan ve çevreyi hesaplayalım
+			alan=g*y;
+			cevre=2*(g+y);
+			document.getElementById("sonuc").innerHTML="alan= "+alan+" çevre="+cevre;
+
+		}
+		</script>
+</body>	
+</html>

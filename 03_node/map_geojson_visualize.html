@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Data Layer: Simple</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map" style="height:600px;width:800px"></div>
+	<div id="box" style="background-color:lightgrey;align:left;height:200px;width:800px">
+	 <br>
+	 Sensor ID : <span id="_id"></span><br><br>
+	 Sensor Description : <span id="_name"></span><br><br>
+	 Sensor Type : <span id="_info"></span><br><br>
+	 Current Sensor Value : <span id="_value"></span>
+	 </div>
+    <script>
+
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 4,
+          center: {lat: 36, lng: 36}
+        });
+
+        // NOTE: This uses cross-domain XHR, and may not work on older browsers.
+        map.data.loadGeoJson('http://umitwin.ddns.net/tests/php/sensorsvirtual/neo_query_geojson.php?x=28.94&y=41.01&dist=400');
+      
+	   map.data.addListener('mouseover', function(event) {
+       document.getElementById('_id').textContent =event.feature.getProperty('id');
+	   document.getElementById('_name').textContent =event.feature.getProperty('name');
+	   document.getElementById('_info').textContent =event.feature.getProperty('info');
+	   document.getElementById('_value').textContent =event.feature.getProperty('value');
+});
+	  
+
+	  
+	  }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvHXjiCIPSvGHtCGNtrb9zLZ2zwTKeY1I&callback=initMap">
+    </script>
+  </body>
+</html>

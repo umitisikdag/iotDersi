@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sayfa Basligi</title>
+</head>
+<body>
+	<form name="giris" onsubmit="bosmu()">
+		Kullanici Adi:<input type="text" id="ad" ><br>
+		Parola:<input type="password" id="parola"><br>
+		<input type="submit"><input type="reset">
+	</form>
+
+	<script>
+		function bosmu() {
+			var kul=document.giris.ad.value;
+			var parola=document.giris.parola.value;
+
+			if(kul.length==0) alert("Kullanici adi giriniz!") ;
+			if(parola.length==0) alert("Parola giriniz!") ;
+		}
+	</script>
+</body>
+</html>

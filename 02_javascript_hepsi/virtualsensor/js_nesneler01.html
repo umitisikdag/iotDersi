@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head><title></title>
+<meta http-equiv="Content-type" content="application/javascript; charset=UTF-8"/>
+<script type="text/javascript" src="d3.min.js"></script>
+<style>
+.chart rect {
+    fill: steelblue;
+  }
+</style>
+</head>
+<body>
+
+<p id="demo"></p>
+<svg class="chart"></svg>
+
+<p></p>
+
+<script>
+
+//----------------------------------------Objeler var ile oluşurulabilir------------------------------------
+var person = new Object();
+person.firstName = "John";
+person.lastName = "Doe";
+person.age = 50;
+person.eyeColor = "blue";
+
+//----------------------------------------Objeler function ile oluşurulabilir, daha iyi yöntem-------------
+function personer(first, last, age, eye) 
+{
+    this.firstName = first;
+    this.lastName = last;
+    this.age = age;
+    this.eyeColor = eye;
+}
+var myFather = new personer("John", "Doe", 50, "blue");
+var myMother = new personer("Sally", "Rally", 48, "green");
+
+//-----------------------------------------Objelerden oluşan diziler object array var ile oluşturulur------------------------------
+var persons=[];
+for(var i=0; i<10; i++)
+{
+persons[i]=new personer("John", "Doe", 50, "blue");
+}
+
+persons.push(myFather);
+persons.push(myFather);
+//-------------------------------------------------JSON Text den object oluşturma---------------------------------------------------
+var text = '{ "employees" : [' +
+'{ "firstName":"John" , "lastName":"Doe" },' +
+'{ "firstName":"Anna" , "lastName":"Smith" },' +
+'{ "firstName":"Peter" , "lastName":"Jones" } ]}';
+
+var obj = JSON.parse(text);
+
+document.getElementById("demo").innerHTML =
+obj.employees[1].firstName + " " + obj.employees[1].lastName; 
+
+//--------------------------------------------Objeden JSON oluşturma---------------------------------------------------------
+var json_data=JSON.stringify(persons);
+document.write(json_data);
+
+
+
+
+	</script>
+	
+</body>
+
+</html>

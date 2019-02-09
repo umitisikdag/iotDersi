@@ -1,0 +1,22 @@
+<html>
+<body>
+<p id="demo">Koordinatlarinizi ogrenmek icin butona tiklayin:</p>
+<button onclick="getLocation()">Beni Konumlandir</button>
+<script>
+var x=document.getElementById("demo");
+function getLocation()
+  {
+  if (navigator.geolocation)
+    {
+    navigator.geolocation.getCurrentPosition(showPosition);
+    }
+  else{x.innerHTML="Tarayiciniz bu ozelligi desteklememektedir.";}
+  }
+function showPosition(position)
+  {
+  x.innerHTML="Enlem: " + position.coords.latitude + 
+  "<br>Boylam: " + position.coords.longitude;	
+  }
+</script>
+</body>
+</html>
